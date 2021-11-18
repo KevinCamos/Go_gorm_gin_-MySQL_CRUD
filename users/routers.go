@@ -1,8 +1,9 @@
+
 package users
 
 import (
 	// "errors"
-	"starbars/common"
+	"starbars/config"
 	"github.com/gin-gonic/gin"
 	"fmt"
 	"net/http"
@@ -13,69 +14,37 @@ import (
 
 func UserRegister(router *gin.RouterGroup) {
 	router.POST("/", UserCreate)
+	// router.GET("/", GetAllUSers)
 	// router.POST("/login", UsersLogin)
 }
 
 func UserCreate(c *gin.Context) {
-	fmt.Println(c)
-	fmt.Println("eh", "eh")
+	var user UserModel
+	// var err
+	c.BindJSON(&user)
+	if err := config.DB.Create(&user).Error; err != nil {
+		fmt.Println(err.Error(), "Ací hi ha un error, routers.go de users")
+		c.AbortWithStatus(http.StatusNotFound)
+	}
+	c.JSON(http.StatusOK, user)
+}
+ 
 
-	userModelValidator := NewUserModelValidator()
-	fmt.Println(userModelValidator)
-
-	if err := userModelValidator.Bind(c); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
+	/* var json UserModel
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	fmt.Println(json)
 
-	// if err := articleModelValidator.Bind(c); err != nil {
-	// 	c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
-	// 	return
-	// }
-	// //fmt.Println(articleModelValidator.articleModel.Author.UserModel)
-
-	// if err := SaveOne(&articleModelValidator.articleModel); err != nil {
-	// 	c.JSON(http.StatusUnprocessableEntity, common.NewError("database", err))
-	// 	return
-	// }
-	// serializer := ArticleSerializer{c, articleModelValidator.articleModel}
-	// c.JSON(http.StatusCreated, gin.H{"article": serializer.Response()})
-}
+	fmt.Println("eh", "eh")
 
 
+	if err := config.DB.Create(json).Error; err != nil {
+		fmt.Println(err, "err")
 
-
-
-/* package users
-
-import (
-	// "errors"
-  	//"starbars/common"
-	  "starbars/config"
-
-	"fmt"
-	"github.com/gin-gonic/gin"
-	
-	_ "github.com/go-sql-driver/mysql"
-	// "net/http"
-	// "strconv"
-)
-
-
-
-func UserRegister(router *gin.RouterGroup) {
-	router.POST("/", CreateUser)
-	// router.POST("/login", UsersLogin)
-}
-
-
-
-//CreateUser ... Insert New data
-func CreateUser(data interface{}) (err error) {
-	
-	fmt.Println("entra a create User","eh")
-	if err = config.DB.Create(data).Error; err != nil {
-		return err
+		return
 	}
-	return nil
-} */
+	return */
+// }
+ 

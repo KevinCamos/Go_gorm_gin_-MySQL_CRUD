@@ -1,7 +1,7 @@
 package main
 
 import (
- 	// "starbars/Config"
+	"starbars/config"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/gin-gonic/gin"
@@ -12,12 +12,9 @@ import (
 
 var err error
 func Migrate(db *gorm.DB) {
-	// users.AutoMigrate()
-	// db.AutoMigrate(&articles.ArticleModel{})
-	// db.AutoMigrate(&articles.TagModel{})
-	// db.AutoMigrate(&articles.FavoriteModel{})
-	// db.AutoMigrate(&articles.ArticleUserModel{})
-	// db.AutoMigrate(&articles.CommentModel{})
+
+	config.DB.AutoMigrate(&users.UserModel{})
+
 }
 
 func main() {
