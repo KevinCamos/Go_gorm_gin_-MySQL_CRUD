@@ -3,7 +3,7 @@ package common
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"starbars/Config"
+	"starbars/config"
 /* 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"os" */
 	_ "github.com/go-sql-driver/mysql"
@@ -17,12 +17,12 @@ var DB *gorm.DB
 var err error
 
 func Init() *gorm.DB {
-	Config.DB, err = gorm.Open("mysql", Config.DbURL(Config.BuildDBConfig()))
+	config.DB, err = gorm.Open("mysql", config.DbURL(config.BuildDBConfig()))
 	if err != nil {
 		fmt.Println("Status:", err)
 	}
 	fmt.Println("Status:", "entra")
-	return Config.DB
+	return config.DB
 /* 	defer Config.DB.Close()
  */
 

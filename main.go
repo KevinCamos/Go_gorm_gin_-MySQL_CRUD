@@ -2,13 +2,12 @@ package main
 
 import (
  	// "starbars/Config"
-	
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/gin-gonic/gin"
 	
 	"starbars/common"
-	"starbars/Users"
+	"starbars/users"
 ) 
 
 var err error

@@ -14,9 +14,13 @@ type UserModel struct {
 	Phone   string `json:"phone"`
 	Address string `json:"address"`
 	Active string `json:"active"`
-	Date_Active string `json:"date_active"`
-	Date_Inactive string `json:"date_inactive"`
+/* 	Date_Active string `json:"date_active"` 
+	Date_Inactive string `json:"date_inactive"`*/
 	Appointemnt string `json:"appointemnt"`
 }
 
+
+func (b *UserModel) TableName() string {
+	return "user"
+}
 
