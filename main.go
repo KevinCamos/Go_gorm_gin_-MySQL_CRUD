@@ -2,7 +2,7 @@ package main
 
 import (
 	"starbars/config"
-	"fmt"
+	// "fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/gin-gonic/gin"
 	
@@ -18,27 +18,14 @@ func Migrate(db *gorm.DB) {
 }
 
 func main() {
-
-	fmt.Println("Entra al main:", "linea 22")
 	db := common.Init()
 	Migrate(db)
 	defer db.Close()
 
-
-
-	
 	r := gin.Default()
 
 	v1 := r.Group("/api")
 	users.UserRegister(v1.Group("/users"))
-
-
-
-
-
-
-
-
 
 
 	r.Run()
